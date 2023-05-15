@@ -321,6 +321,75 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!1001 &105001343
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1506171767866854, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_Name
+      value: Anubis
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122020059824942, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +688,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rule_: {fileID: 1731470053}
   level_: {fileID: 1843499553}
+--- !u!1 &388290539 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1506171767866854, guid: c8fa7bc4b888ff149b31922c4741d6ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 105001343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &388290542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388290539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7547d3a3b63fd142aea6d42ae2439cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  speed: 2
+  detectionRadius: 5
+  chaseTime: 5
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,7 +2304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6cf8846ddc560841a00fd468212a6bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
   eraseDelay: 1
 --- !u!136 &1245547408
 CapsuleCollider:
