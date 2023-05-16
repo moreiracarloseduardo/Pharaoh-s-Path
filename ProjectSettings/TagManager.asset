@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Weapons
   - FireParticle
+  - Spike
   layers:
   - Default
   - TransparentFX
