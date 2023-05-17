@@ -49,6 +49,9 @@ public class DrawPath_ : MonoBehaviour {
                 lineRenderer.SetPosition(pathPositions.Count - 1, adjustedHitPoint);
             }
         }
+        if (Input.GetMouseButton(0)) {
+            Game_.instance.inkAmount -= Game_.instance.inkUsageRate * Time.deltaTime;
+        }
 
         if (Input.GetMouseButtonUp(0)) {
             playerStates.ChangeState(PlayerStates.Moving);
