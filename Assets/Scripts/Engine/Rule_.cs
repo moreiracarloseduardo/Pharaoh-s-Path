@@ -12,5 +12,10 @@ public class Rule_ : MonoBehaviour {
         gameStates.ChangeState(GameStates.Game);
     }
 
+    IEnumerator Lose_Enter() {
+        
+        yield return null;
+    }
+
 
 }
