@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class EventsManager_ : MonoBehaviour {
     public static EventsManager_ instance;
-
     public event Action OnPlayerDeath;
-    
-    // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    public delegate void InkAction(float amount);
+    public event InkAction OnInkUsed;
+    public event InkAction OnInkRefilled;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private void Awake() {
         if (instance != null && instance != this) {
             Destroy(this.gameObject);
@@ -21,4 +23,6 @@ public class EventsManager_ : MonoBehaviour {
     public void PlayerDeath() {
         OnPlayerDeath?.Invoke();
     }
+    
 }
+
