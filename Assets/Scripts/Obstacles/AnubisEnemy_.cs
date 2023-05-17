@@ -77,14 +77,13 @@ public class AnubisEnemy_ : MonoBehaviour {
 
     void Attacking_Enter() {
         animator.SetTrigger("Attack");
-        // Log que o player foi atacado
         Debug.Log("Player morreu");
         isAttacking = true;
         EnableWeaponColliders();
-        StartCoroutine(ReturnToChasingAfterDelay(1f)); // Suponha que a animação de ataque dure 1 segundo.
+        StartCoroutine(ReturnToChasingAfterDelay(1f)); 
+        EventsManager_.instance.PlayerDeath();
     }
     void Attacking_Exit() {
-        // Desabilitar os colliders das armas
         DisableWeaponColliders();
     }
 

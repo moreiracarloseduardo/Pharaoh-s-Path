@@ -22,9 +22,8 @@ public class Arrow_ : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player") {
-            Game_.instance.rule_.gameStates.ChangeState(GameStates.Lose);
+            EventsManager_.instance.PlayerDeath();
             rb.isKinematic = false;
-            Debug.Log("Acertou");
         }
     }
 }
