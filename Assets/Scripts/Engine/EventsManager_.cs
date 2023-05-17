@@ -8,7 +8,7 @@ public class EventsManager_ : MonoBehaviour {
 
     public event Action OnPlayerDeath;
     
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private void Awake() {
         if (instance != null && instance != this) {
             Destroy(this.gameObject);
