@@ -11,6 +11,7 @@ public class DrawPath_ : MonoBehaviour {
 
     public float speed = 2f;
     public float eraseDelay = 1f;
+    private bool canDraw = false;
     private List<Vector3> pathPositions = new List<Vector3>();
     private int currentPositionIndex = 0;
     private Animator animator;
@@ -19,6 +20,18 @@ public class DrawPath_ : MonoBehaviour {
     void Start() {
         animator = player.GetComponent<Animator>();
         playerStates = StateMachine<PlayerStates>.Initialize(this, PlayerStates.Idle);
+        Game_.instance.rule_.gameStates.Changed += HandleGameStateChange;
+    }
+    void HandleGameStateChange(GameStates state) {
+        switch (state) {
+            case GameStates.Game:
+                canDraw = true;
+                break;
+            case GameStates.Start:
+            case GameStates.Lose:
+                canDraw = false;
+                break;
+        }
     }
 
     void Idle_Enter() {
@@ -28,33 +41,36 @@ public class DrawPath_ : MonoBehaviour {
     }
 
     void Idle_Update() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (canDraw && Input.GetMouseButtonDown(0)) {
+            Debug.Log("Changing to Drawing state");
             playerStates.ChangeState(PlayerStates.Drawing);
         }
     }
 
     void Drawing_Enter() {
-
+        Debug.Log("Entered Drawing state");
     }
 
     void Drawing_Update() {
-        Vector3 mousePos = Input.mousePosition;
-        Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100f)) {
-            if (hit.collider.gameObject.CompareTag("Ground")) {
-                Vector3 adjustedHitPoint = hit.point + new Vector3(0, .1f, 0);
-                pathPositions.Add(adjustedHitPoint);
-                lineRenderer.positionCount = pathPositions.Count;
-                lineRenderer.SetPosition(pathPositions.Count - 1, adjustedHitPoint);
+        if (canDraw && Game_.instance.rule_.gameStates.State == GameStates.Game) {
+            Vector3 mousePos = Input.mousePosition;
+            Ray ray = Camera.main.ScreenPointToRay(mousePos);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100f)) {
+                if (hit.collider.gameObject.CompareTag("Ground")) {
+                    Vector3 adjustedHitPoint = hit.point + new Vector3(0, .1f, 0);
+                    pathPositions.Add(adjustedHitPoint);
+                    lineRenderer.positionCount = pathPositions.Count;
+                    lineRenderer.SetPosition(pathPositions.Count - 1, adjustedHitPoint);
+                }
             }
-        }
-        if (Input.GetMouseButton(0)) {
-            Game_.instance.inkAmount -= Game_.instance.inkUsageRate * Time.deltaTime;
-        }
+            if (Input.GetMouseButton(0)) {
+                Game_.instance.inkAmount -= Game_.instance.inkUsageRate * Time.deltaTime;
+            }
 
-        if (Input.GetMouseButtonUp(0)) {
-            playerStates.ChangeState(PlayerStates.Moving);
+            if (Input.GetMouseButtonUp(0)) {
+                playerStates.ChangeState(PlayerStates.Moving);
+            }
         }
     }
 
@@ -64,7 +80,9 @@ public class DrawPath_ : MonoBehaviour {
 
     void Moving_Update() {
         if (pathPositions.Count > 0 && currentPositionIndex < pathPositions.Count) {
-            MovePharaoh();
+            if (Game_.instance.rule_.gameStates.State == GameStates.Game) {
+                MovePharaoh();
+            }
         }
 
         if (currentPositionIndex == pathPositions.Count) {
