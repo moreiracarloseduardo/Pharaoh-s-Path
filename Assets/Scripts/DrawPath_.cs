@@ -86,8 +86,11 @@ public class DrawPath_ : MonoBehaviour {
         Vector3 targetPosition = new Vector3(pathPositions[currentPositionIndex].x, player.transform.position.y, pathPositions[currentPositionIndex].z);
 
         Vector3 directionToTarget = (targetPosition - player.transform.position).normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, speed * Time.deltaTime);
+
+        if (directionToTarget != Vector3.zero) {
+            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, speed * Time.deltaTime);
+        }
 
         player.transform.position = Vector3.MoveTowards(player.transform.position, targetPosition, speed * Time.deltaTime);
 
@@ -101,9 +104,7 @@ public class DrawPath_ : MonoBehaviour {
         } else {
             animator.SetBool("IsMoving", true);
         }
-
     }
-
     IEnumerator ErasePathAfterDelay(float delay) {
         yield return new WaitForSeconds(delay);
 
