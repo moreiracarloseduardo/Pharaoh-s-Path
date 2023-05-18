@@ -11,6 +11,7 @@ public class Game_ : MonoBehaviour {
     public UI_ uI_;
     public VFX_ vFX_;
     public Audio_ audio_;
+    public EndLevel_ endLevel;
 
 
     private float _inkAmount = 10;
