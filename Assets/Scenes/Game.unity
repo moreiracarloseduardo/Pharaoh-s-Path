@@ -4921,6 +4921,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackHand
       objectReference: {fileID: 0}
+    - target: {fileID: 6454320195760751793, guid: 250145e9ac4074b7bacc130ec1d651df,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8692795199135115991, guid: 250145e9ac4074b7bacc130ec1d651df,
         type: 3}
       propertyPath: m_LocalPosition.x
