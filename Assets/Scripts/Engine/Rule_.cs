@@ -24,6 +24,7 @@ public class Rule_ : MonoBehaviour {
         Game_.instance.uI_.inGameUi.SetActive(true);
         Game_.instance.uI_.winUi.SetActive(false);
         Game_.instance.uI_.loseUi.SetActive(false);
+        Game_.instance.audio_.mainMusicAudioSource.Play();
     }
 
     IEnumerator Win_Enter() {
@@ -32,10 +33,12 @@ public class Rule_ : MonoBehaviour {
         Game_.instance.uI_.inGameUi.SetActive(false);
         Game_.instance.uI_.winUi.SetActive(true);
         Game_.instance.uI_.loseUi.SetActive(false);
+
     }
 
     IEnumerator Lose_Enter() {
         Lean.Pool.LeanPool.Spawn(Game_.instance.vFX_.deathParticle, Game_.instance.player_.gameObject.transform.position + Vector3.up * .6f, Quaternion.Euler(-90, 0, 0));
+        Game_.instance.audio_.mainMusicAudioSource.Stop();
         yield return new WaitForSeconds(2);
         Game_.instance.uI_.StartUi.SetActive(false);
         Game_.instance.uI_.inGameUi.SetActive(false);
