@@ -9,13 +9,37 @@ public class Rule_ : MonoBehaviour {
 
     void Awake() {
         gameStates = StateMachine<GameStates>.Initialize(this);
-        gameStates.ChangeState(GameStates.Game);
+        gameStates.ChangeState(GameStates.Start);
+    }
+
+    void Start_Enter() {
+        Game_.instance.uI_.StartUi.SetActive(true);
+        Game_.instance.uI_.inGameUi.SetActive(false);
+        Game_.instance.uI_.winUi.SetActive(false);
+        Game_.instance.uI_.loseUi.SetActive(false);
+    }
+
+    void Game_Enter() {
+        Game_.instance.uI_.StartUi.SetActive(false);
+        Game_.instance.uI_.inGameUi.SetActive(true);
+        Game_.instance.uI_.winUi.SetActive(false);
+        Game_.instance.uI_.loseUi.SetActive(false);
+    }
+
+    void Win_Enter() {
+        Game_.instance.uI_.StartUi.SetActive(false);
+        Game_.instance.uI_.inGameUi.SetActive(false);
+        Game_.instance.uI_.winUi.SetActive(true);
+        Game_.instance.uI_.loseUi.SetActive(false);
     }
 
     IEnumerator Lose_Enter() {
-        
+        Game_.instance.uI_.StartUi.SetActive(false);
+        Game_.instance.uI_.inGameUi.SetActive(false);
+        Game_.instance.uI_.winUi.SetActive(false);
+        Game_.instance.uI_.loseUi.SetActive(true);
+
         yield return null;
     }
-
 
 }
