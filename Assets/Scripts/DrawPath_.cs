@@ -15,7 +15,7 @@ public class DrawPath_ : MonoBehaviour {
     private List<Vector3> pathPositions = new List<Vector3>();
     private int currentPositionIndex = 0;
     private Animator animator;
-    private StateMachine<PlayerStates> playerStates;
+    public StateMachine<PlayerStates> playerStates;
 
     void Start() {
         animator = player.GetComponent<Animator>();

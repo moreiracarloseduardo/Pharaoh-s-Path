@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InkItem_ : MonoBehaviour {
+    public static event Action OnInkItemPicked;
     public float refillAmount = 1;
     public float rotationSpeed = 50f; 
     public float floatSpeed = 0.5f; 
@@ -24,6 +26,7 @@ public class InkItem_ : MonoBehaviour {
             Game_.instance.inkAmount += refillAmount;
             Lean.Pool.LeanPool.Spawn(Game_.instance.vFX_.inkFillParticle, transform.position, Quaternion.identity);
             Game_.instance.audio_.audioSource.PlayOneShot(Game_.instance.audio_.inkFillClip);
+            OnInkItemPicked?.Invoke();
             Destroy(gameObject);
         }
     }
