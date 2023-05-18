@@ -9,6 +9,8 @@ TagManager:
   - Weapons
   - FireParticle
   - Spike
+  - Collision
+  - EndLevel
   layers:
   - Default
   - TransparentFX

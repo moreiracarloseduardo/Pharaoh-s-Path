@@ -57,11 +57,19 @@ public class DrawPath_ : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100f)) {
-                if (hit.collider.gameObject.CompareTag("Ground")) {
+                if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("EndLevel")) {
                     Vector3 adjustedHitPoint = hit.point + new Vector3(0, .1f, 0);
                     pathPositions.Add(adjustedHitPoint);
                     lineRenderer.positionCount = pathPositions.Count;
                     lineRenderer.SetPosition(pathPositions.Count - 1, adjustedHitPoint);
+                } else if (hit.collider.gameObject.CompareTag("Collision")) {
+                    // If the ray hits an object with "YourTag", add an offset to the last point
+                    Vector3 adjustedHitPoint = hit.point + new Vector3(0, .1f, 0);
+                    pathPositions[pathPositions.Count - 1] = adjustedHitPoint;
+                    lineRenderer.SetPosition(pathPositions.Count - 1, adjustedHitPoint);
+
+                    // Change state to Moving
+                    playerStates.ChangeState(PlayerStates.Moving);
                 }
             }
             if (Input.GetMouseButton(0)) {
