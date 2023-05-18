@@ -1689,7 +1689,8 @@ MonoBehaviour:
   rule_: {fileID: 1731470053}
   level_: {fileID: 1843499553}
   player_: {fileID: 1245547412}
-  UI_: {fileID: 1776660724}
+  uI_: {fileID: 1776660724}
+  vFX_: {fileID: 1799296143}
   inkUsageRate: 1
 --- !u!114 &388030934
 MonoBehaviour:
@@ -3364,7 +3365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1777034858
 Transform:
   m_ObjectHideFlags: 0
@@ -3527,6 +3528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5694d2d4078377a42bc018347d30c0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathParticle: {fileID: 136450, guid: 75f06efdf4dffb64196a8a771986c0b8, type: 3}
 --- !u!1 &1824565336
 GameObject:
   m_ObjectHideFlags: 0

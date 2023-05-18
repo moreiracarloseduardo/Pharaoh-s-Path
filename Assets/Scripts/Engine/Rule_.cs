@@ -34,6 +34,7 @@ public class Rule_ : MonoBehaviour {
     }
 
     IEnumerator Lose_Enter() {
+        Lean.Pool.LeanPool.Spawn(Game_.instance.vFX_.deathParticle, Game_.instance.player_.gameObject.transform.position + Vector3.up * .6f, Quaternion.Euler(-90, 0, 0));
         Game_.instance.uI_.StartUi.SetActive(false);
         Game_.instance.uI_.inGameUi.SetActive(false);
         Game_.instance.uI_.winUi.SetActive(false);
