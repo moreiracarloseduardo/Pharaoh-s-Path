@@ -21,11 +21,13 @@ public class FireTotem_ : MonoBehaviour {
 
             if (isActive) {
                 fireParticles.Stop();
+                Game_.instance.audio_.flamesAudioSource.Stop();
                 fireParticleObject.SetActive(false);
                 isActive = false;
                 totemCollider.SetActive(false);
             } else {
                 fireParticles.Play();
+                Game_.instance.audio_.flamesAudioSource.Play();
                 fireParticleObject.SetActive(true);
                 isActive = true;
                 totemCollider.SetActive(true);
