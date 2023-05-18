@@ -26,7 +26,8 @@ public class Rule_ : MonoBehaviour {
         Game_.instance.uI_.loseUi.SetActive(false);
     }
 
-    void Win_Enter() {
+    IEnumerator Win_Enter() {
+        yield return new WaitForSeconds(2);
         Game_.instance.uI_.StartUi.SetActive(false);
         Game_.instance.uI_.inGameUi.SetActive(false);
         Game_.instance.uI_.winUi.SetActive(true);
@@ -35,12 +36,11 @@ public class Rule_ : MonoBehaviour {
 
     IEnumerator Lose_Enter() {
         Lean.Pool.LeanPool.Spawn(Game_.instance.vFX_.deathParticle, Game_.instance.player_.gameObject.transform.position + Vector3.up * .6f, Quaternion.Euler(-90, 0, 0));
+        yield return new WaitForSeconds(2);
         Game_.instance.uI_.StartUi.SetActive(false);
         Game_.instance.uI_.inGameUi.SetActive(false);
         Game_.instance.uI_.winUi.SetActive(false);
         Game_.instance.uI_.loseUi.SetActive(true);
-
-        yield return null;
     }
 
 }
