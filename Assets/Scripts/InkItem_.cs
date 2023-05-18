@@ -22,6 +22,8 @@ public class InkItem_ : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
             Game_.instance.inkAmount += refillAmount;
+            Lean.Pool.LeanPool.Spawn(Game_.instance.vFX_.inkFillParticle, transform.position, Quaternion.identity);
+            Game_.instance.audio_.audioSource.PlayOneShot(Game_.instance.audio_.inkFillClip);
             Destroy(gameObject);
         }
     }

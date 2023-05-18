@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class VFX_ : MonoBehaviour {
     public GameObject deathParticle;
+    public GameObject inkFillParticle;
   
 }
