@@ -39,12 +39,21 @@ public class Game_ : MonoBehaviour {
         instance = this;
     }
     void Start() {
+        SetRefreshRate();
         uI_.UpdateInkBar(inkAmount / 10);
         EventsManager_.instance.OnPlayerDeath += HandlePlayerDeath;
         EventsManager_.instance.OnGameStart += HandleGameStart;
         EventsManager_.instance.OnNextLevel += HandleNextLevel;
         EventsManager_.instance.OnGameRestart += HandleGameRestart;
         EventsManager_.instance.OnPlayerDeath += HandlePlayerDeath;
+    }
+    void SetRefreshRate() {
+        Resolution[] resolutions = Screen.resolutions;
+        int maxRefreshRate = 60;
+        foreach (var res in resolutions) {
+            if (res.refreshRate > maxRefreshRate) maxRefreshRate = res.refreshRate;
+        }
+        Application.targetFrameRate = maxRefreshRate;
     }
     void HandleGameStart() {
         rule_.gameStates.ChangeState(GameStates.Game);
