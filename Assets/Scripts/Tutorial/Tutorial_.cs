@@ -65,13 +65,6 @@ public class Tutorial_ : MonoBehaviour {
         textTutorial03.SetActive(false);
     }
 
-    // void Tutorial02_Update() {
-    //     // Substituir por condição que checa se o jogador pegou o objeto InkObject
-    //     tutorialStates.ChangeState(TutorialStates.Tutorial03);
-    //     if (false) {
-    //     }
-    // }
-
     IEnumerator Tutorial03_Enter() {
         StartHandAnimation(startPoint3, endPoint3);
         yield return new WaitForSeconds(1);

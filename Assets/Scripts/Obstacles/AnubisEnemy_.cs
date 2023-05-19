@@ -77,7 +77,6 @@ public class AnubisEnemy_ : MonoBehaviour {
 
     void Attacking_Enter() {
         animator.SetTrigger("Attack");
-        Debug.Log("Player morreu");
         isAttacking = true;
         EnableWeaponColliders();
         StartCoroutine(ReturnToChasingAfterDelay(1f)); 

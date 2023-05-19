@@ -13,10 +13,6 @@ public class Game_ : MonoBehaviour {
     public Audio_ audio_;
     public EndLevel_ endLevel;
 
-    [Header("Tutorial")]
-
-
-
     private float _inkAmount = 10;
     public float inkAmount {
         get { return _inkAmount; }
@@ -34,7 +30,7 @@ public class Game_ : MonoBehaviour {
             if (level_ != null && level_.currentLevel != null) {
                 return level_.currentLevel.inkUsageRate;
             } else {
-                return 1;  // valor padrão se não houver nível atual
+                return 1;  
             }
         }
     }
@@ -51,7 +47,6 @@ public class Game_ : MonoBehaviour {
         EventsManager_.instance.OnPlayerDeath += HandlePlayerDeath;
     }
     void HandleGameStart() {
-        Debug.Log("Ink usage rate for this level: " + inkUsageRate);
         rule_.gameStates.ChangeState(GameStates.Game);
     }
 

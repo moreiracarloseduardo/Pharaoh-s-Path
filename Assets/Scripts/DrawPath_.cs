@@ -42,14 +42,11 @@ public class DrawPath_ : MonoBehaviour {
 
     void Idle_Update() {
         if (canDraw && Input.GetMouseButtonDown(0)) {
-            Debug.Log("Changing to Drawing state");
             playerStates.ChangeState(PlayerStates.Drawing);
         }
     }
 
-    void Drawing_Enter() {
-        Debug.Log("Entered Drawing state");
-    }
+    void Drawing_Enter() {}
 
     void Drawing_Update() {
         if (canDraw && Game_.instance.rule_.gameStates.State == GameStates.Game) {
@@ -63,12 +60,10 @@ public class DrawPath_ : MonoBehaviour {
                     lineRenderer.positionCount = pathPositions.Count;
                     lineRenderer.SetPosition(pathPositions.Count - 1, adjustedHitPoint);
                 } else if (hit.collider.gameObject.CompareTag("Collision")) {
-                    // If the ray hits an object with "YourTag", add an offset to the last point
                     Vector3 adjustedHitPoint = hit.point + new Vector3(0, .1f, 0);
                     pathPositions[pathPositions.Count - 1] = adjustedHitPoint;
                     lineRenderer.SetPosition(pathPositions.Count - 1, adjustedHitPoint);
 
-                    // Change state to Moving
                     playerStates.ChangeState(PlayerStates.Moving);
                 }
             }
