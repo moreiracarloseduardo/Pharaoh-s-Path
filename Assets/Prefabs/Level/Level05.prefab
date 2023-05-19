@@ -54071,7 +54071,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 388290542, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
       propertyPath: speed
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 388290542, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
       propertyPath: animator
@@ -54080,6 +54080,10 @@ PrefabInstance:
     - target: {fileID: 388290542, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
       propertyPath: attackRadius
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 388290542, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
+      propertyPath: detectionRadius
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1506171767866854, guid: c8fa7bc4b888ff149b31922c4741d6ed, type: 3}
       propertyPath: m_Name

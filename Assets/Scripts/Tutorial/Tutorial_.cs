@@ -35,7 +35,6 @@ public class Tutorial_ : MonoBehaviour {
             if (state == GameStates.Game && !tutorialComplete) {
                 tutorialStates.ChangeState(TutorialStates.Tutorial01);
                 handTutorial.SetActive(true);
-                Debug.Log("comecou");
             }
         };
     }
