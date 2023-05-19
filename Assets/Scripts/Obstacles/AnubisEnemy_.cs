@@ -51,7 +51,6 @@ public class AnubisEnemy_ : MonoBehaviour {
 
     void Idle_Enter() {
         if (animator == null) {
-            Debug.LogError("Animator is null in Idle_Enter");
             return;
         }
         animator.SetTrigger("Stop");
