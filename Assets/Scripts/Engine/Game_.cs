@@ -13,7 +13,6 @@ public class Game_ : MonoBehaviour {
     public Audio_ audio_;
     public EndLevel_ endLevel;
 
-
     private float _inkAmount = 10;
     public float inkAmount {
         get { return _inkAmount; }
@@ -26,7 +25,15 @@ public class Game_ : MonoBehaviour {
         }
     }
 
-    public float inkUsageRate = 1;
+    public float inkUsageRate {
+        get {
+            if (level_ != null && level_.currentLevel != null) {
+                return level_.currentLevel.inkUsageRate;
+            } else {
+                return 1;  
+            }
+        }
+    }
 
     void Awake() {
         instance = this;
@@ -55,11 +62,5 @@ public class Game_ : MonoBehaviour {
         rule_.gameStates.ChangeState(GameStates.Lose);
         player_.GetComponent<Animator>().SetTrigger("Die");
     }
-    // void UpdateInkAmount(float amount) {
-    //     inkAmount += amount;
-    //     uI_.UpdateInkBar(inkAmount);
-    //     if (inkAmount <= 0) {
-    //         HandlePlayerDeath();
-    //     }
-    // }
+
 }

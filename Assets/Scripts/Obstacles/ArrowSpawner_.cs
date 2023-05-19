@@ -4,8 +4,8 @@ using UnityEngine;
 
 
 public enum CubeType {
-    Manual, // Triggered by button
-    Automatic // Fires at regular intervals
+    Manual, 
+    Automatic 
 }
 
 

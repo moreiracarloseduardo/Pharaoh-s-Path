@@ -8,34 +8,51 @@ public class AnubisEnemy_ : MonoBehaviour {
     public Transform[] waypoints;
     public float speed = 2f;
     public float detectionRadius = 4f;
-    public float chaseTime = 3f;
     public float attackRadius = .5f;
 
     private StateMachine<EnemyStates> enemyStates;
     private int currentWaypoint = 0;
-    private float chaseTimer = 0f;
-    private GameObject player;
-    private Animator animator;
+    // private GameObject player;
+    public Animator animator;
     private bool isAttacking = false;
     [SerializeField] private Collider[] weaponColliders;
+    private DrawPath_ playerDrawing;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     void Awake() {
-        enemyStates = StateMachine<EnemyStates>.Initialize(this);
-        player = GameObject.FindGameObjectWithTag("Player");
-        animator = GetComponent<Animator>();
+        enemyStates = StateMachine<EnemyStates>.Initialize(this, EnemyStates.Idle);
+        // player = GameObject.FindGameObjectWithTag("Player");
+        playerDrawing = Game_.instance.player_.GetComponent<DrawPath_>();
+        // animator = GetComponent<Animator>();
         weaponColliders = GetComponentsInChildren<Collider>();
+        if (animator == null) {
+            Debug.LogError("Failed to find Animator");
+        }
+    }
+
+    void Start() {
+        if (playerDrawing == null) {
+            Debug.LogError("Failed to find PlayerDrawing");
+        }
     }
 
     void Update() {
-        if (isAttacking) return;
+        if (isAttacking || enemyStates == null) return;
 
-        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-        if (distanceToPlayer <= detectionRadius) {
-            enemyStates.ChangeState(EnemyStates.Chasing);
+        float distanceToPlayer = Vector3.Distance(Game_.instance.player_.gameObject.transform.position, transform.position);
+        if (playerDrawing != null && playerDrawing.playerStates != null) {
+            if (distanceToPlayer <= detectionRadius && playerDrawing.playerStates.State == PlayerStates.Drawing) {
+                enemyStates.ChangeState(EnemyStates.Chasing);
+            } else if (enemyStates.State == EnemyStates.Chasing && (distanceToPlayer > detectionRadius || playerDrawing.playerStates.State != PlayerStates.Drawing)) {
+                enemyStates.ChangeState(EnemyStates.Idle);
+            }
         }
     }
 
     void Idle_Enter() {
+        if (animator == null) {
+            return;
+        }
         animator.SetTrigger("Stop");
     }
 
@@ -51,36 +68,28 @@ public class AnubisEnemy_ : MonoBehaviour {
     }
 
     void Chasing_Enter() {
-        chaseTimer = chaseTime;
         animator.SetTrigger("Run");
     }
 
     void Chasing_Update() {
-        Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+        Vector3 directionToPlayer = (Game_.instance.player_.gameObject.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
 
-        if (Vector3.Distance(transform.position, player.transform.position) > attackRadius) {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        if (Vector3.Distance(transform.position, Game_.instance.player_.gameObject.transform.position) > attackRadius) {
+            transform.position = Vector3.MoveTowards(transform.position, Game_.instance.player_.gameObject.transform.position, speed * Time.deltaTime);
         }
 
-        chaseTimer -= Time.deltaTime;
-        if (Vector3.Distance(transform.position, player.transform.position) <= attackRadius) {
+        if (Vector3.Distance(transform.position, Game_.instance.player_.gameObject.transform.position) <= attackRadius) {
             enemyStates.ChangeState(EnemyStates.Attacking);
-            return;
-        }
-
-        if (chaseTimer <= 0) {
-            enemyStates.ChangeState(EnemyStates.Idle);
         }
     }
 
     void Attacking_Enter() {
         animator.SetTrigger("Attack");
-        Debug.Log("Player morreu");
         isAttacking = true;
         EnableWeaponColliders();
-        StartCoroutine(ReturnToChasingAfterDelay(1f)); 
+        StartCoroutine(ReturnToChasingAfterDelay(1f));
         EventsManager_.instance.PlayerDeath();
     }
     void Attacking_Exit() {
